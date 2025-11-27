@@ -79,7 +79,7 @@ public sealed class ExpressionEqualityComparer : IEqualityComparer<Expression?>
                         case IEnumerable enumerable:
                             foreach (var item in enumerable)
                             {
-                                hash.Add(item.GetHashCode());
+                                hash.Add(item?.GetHashCode() ?? 0);
                             }
                             break;
 
@@ -390,7 +390,7 @@ public sealed class ExpressionEqualityComparer : IEqualityComparer<Expression?>
 
             if (v1 is IEnumerable enumerable1 && v2 is IEnumerable enumerable2)
             {
-                return enumerable1.Cast<object>().SequenceEqual(enumerable2.Cast<object>());
+                return enumerable1.Cast<object?>().SequenceEqual(enumerable2.Cast<object?>());
             }
 
             return false;
